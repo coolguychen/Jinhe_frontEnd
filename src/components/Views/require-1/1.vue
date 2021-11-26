@@ -16,10 +16,20 @@
 </template>
 
 <script>
+
+import request from '../../../utils/request'
+
 export default {
   data () {
     return {
       input: ''
+    }
+  },
+  methods: {
+    searchByName () {
+      request.get('/basic/get?id=17', {}).then(res => {
+        console.log(res)
+      })
     }
   }
 }
