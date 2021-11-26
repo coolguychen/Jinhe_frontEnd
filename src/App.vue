@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <el-container>
-        <el-aside width="200px">
+xiu        <el-aside style="width: 300px">
           <!--引入自定义左侧菜单栏-->
           <left-menu></left-menu>
         </el-aside>
