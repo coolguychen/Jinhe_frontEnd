@@ -13,58 +13,79 @@
 -->
 <template>
   <div>
-    <el-row style="width: auto" type="flex" class="row-input" justify="center">
-      <div>
-        <el-input  v-model="line" placeholder="请输入查询的线路名" clearable>
+    <el-row type="flex" class="row-input" justify="center">
+        <el-input style="width: 500px" v-model="linePath" placeholder="请输入查询的线路名" clearable>
+          <template slot="append">路</template>
           <el-select  style="width: 100px" v-model="direction" slot="prepend" placeholder="请选择">
             <el-option label="上行" value="上行"></el-option>
             <el-option label="下行" value="下行"></el-option>
           </el-select>
         </el-input>
-      </div>
       <el-col :span="6" :offset="1">
         <el-button type="primary" @click="getByLineName" >搜索</el-button>
       </el-col>
     </el-row>
 
-    <!--返回该线路的全部station信息-->
     <div style="margin-top:20px">
       <el-descriptions title="该线路方向上的全部站点信息" >
       </el-descriptions>
     </div>
-    <el-table
-      :data="tableData"
-      stripe
-      style="width: 100%; margin-left:50px; text-align: center; align-content: center">
-      <el-table-column
-        prop="id"
-        label="id"
-        width="250"
-        align="center"
-      >
-      </el-table-column>
-      <el-table-column
-        prop="name"
-        label="站名"
-        align="center"
-        width="250">
-      </el-table-column>
-      <el-table-column
-        prop="english"
-        label="站名（英文）"
-        width="250"
-        align="center"
-      >
-      </el-table-column>
-    </el-table>
+
+    <!--返回该线路的全部station信息-->
+    <subDialog v-show="dialog_visible">
+      <div style="margin-top: 20px" class="block">
+        <el-timeline >
+          <el-timeline-item
+            v-for="(item, index) in tableData"
+            :key="index"
+            :color=color>
+            {{"站点id: "+ item.id}}
+            <br/>
+            {{item.name}}
+            <br/>
+            {{item.english}}
+          </el-timeline-item>
+        </el-timeline>
+      </div>
+    </subDialog>
+
+<!--    <div style="margin-top:20px">-->
+<!--      <el-descriptions title="该线路方向上的全部站点信息" >-->
+<!--      </el-descriptions>-->
+<!--    </div>-->
+<!--    <el-table-->
+<!--      :data="tableData"-->
+<!--      stripe-->
+<!--      style="width: 100%; margin-left:50px; text-align: center; align-content: center">-->
+<!--      <el-table-column-->
+<!--        prop="id"-->
+<!--        label="id"-->
+<!--        width="250"-->
+<!--        align="center"-->
+<!--      >-->
+<!--      </el-table-column>-->
+<!--      <el-table-column-->
+<!--        prop="name"-->
+<!--        label="站名"-->
+<!--        align="center"-->
+<!--        width="250">-->
+<!--      </el-table-column>-->
+<!--      <el-table-column-->
+<!--        prop="english"-->
+<!--        label="站名（英文）"-->
+<!--        width="250"-->
+<!--        align="center"-->
+<!--      >-->
+<!--      </el-table-column>-->
+<!--    </el-table>-->
 <!--    <template>-->
 <!--      <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>-->
 <!--    </template>-->
-    <subDialog v-show="dialog_visible">
+    <subDialog v-show="error_dialog">
       <el-alert
         title="错误提示："
         type="error"
-        description="该线路不存在"
+        v-bind:description="msg"
         show-icon>
       </el-alert>
     </subDialog>
@@ -89,8 +110,12 @@ export default {
   data () {
     return {
       dialog_visible: false,
+      error_dialog: false,
       dialog_visible1: false,
       line: '',
+      color: "#409EFF",
+      linePath:'',
+      msg:'',
       direction: '',
       tableData:[
       ]
@@ -98,14 +123,14 @@ export default {
   },
   methods:{
     getByLineName() {
-      console.log(this.line,this.direction)
+      console.log(this.linePath,this.direction)
+      this.line = this.linePath + '路'
       // 如果direction为空 只传name
       if(this.direction == '')
         request.get('/station/allStations', { params:{
             line: this.line
           }}).then(res => {
           console.log(res)
-          this.tableData = res
           this.dialog_visible1 = true
         })
       else{
@@ -115,9 +140,13 @@ export default {
           }}).then(res => {
           console.log(res)
           if(res.result == false) { //不存在 提示
-            this.dialog_visible = true;
+            this.msg = res.msg;
+            this.error_dialog = true;
           }
-          else this.tableData = res.data
+          else {
+            this.tableData = res.data
+            this.dialog_visible = true
+          }
         })
       }
     }

@@ -20,7 +20,7 @@
     </el-row>
 
     <subDialog v-show="dialog_visible">
-      <div class="block">
+      <div style="margin-top: 50px" class="block">
         <el-timeline >
           <el-timeline-item
             v-for="(activity, index) in activities"
