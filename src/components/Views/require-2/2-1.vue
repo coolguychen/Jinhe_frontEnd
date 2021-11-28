@@ -49,38 +49,6 @@
       </div>
     </subDialog>
 
-<!--    <div style="margin-top:20px">-->
-<!--      <el-descriptions title="该线路方向上的全部站点信息" >-->
-<!--      </el-descriptions>-->
-<!--    </div>-->
-<!--    <el-table-->
-<!--      :data="tableData"-->
-<!--      stripe-->
-<!--      style="width: 100%; margin-left:50px; text-align: center; align-content: center">-->
-<!--      <el-table-column-->
-<!--        prop="id"-->
-<!--        label="id"-->
-<!--        width="250"-->
-<!--        align="center"-->
-<!--      >-->
-<!--      </el-table-column>-->
-<!--      <el-table-column-->
-<!--        prop="name"-->
-<!--        label="站名"-->
-<!--        align="center"-->
-<!--        width="250">-->
-<!--      </el-table-column>-->
-<!--      <el-table-column-->
-<!--        prop="english"-->
-<!--        label="站名（英文）"-->
-<!--        width="250"-->
-<!--        align="center"-->
-<!--      >-->
-<!--      </el-table-column>-->
-<!--    </el-table>-->
-<!--    <template>-->
-<!--      <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>-->
-<!--    </template>-->
     <subDialog v-show="error_dialog">
       <el-alert
         title="错误提示："
