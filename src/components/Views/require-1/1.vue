@@ -30,6 +30,19 @@
 
     </subDialog>
 
+    <subDialog v-show="error_dialog">
+      <el-alert
+        title="错误提示："
+        type="error"
+        v-bind:description="error_msg"
+        show-icon>
+      </el-alert>
+    </subDialog>
+
+    <slot class="error">
+
+    </slot>
+
 
   </div>
 </template>
@@ -49,25 +62,36 @@ export default {
       runtime: '',
       interval: '',
       type: '',
-      dialog_visible: false
+      dialog_visible: false,
+      error_dialog: false,
+      error_msg:''
     }
   },
   methods: {
     searchByName () {
       console.log(this.id)
-      request.get('/basic/getLineInfo', { params:{
+      request.get('/basic/lineInfo', { params:{
           name: this.name
         }}).then(res => {
         console.log(res)
-        this.type = res.type
-        this.name = res.name
-        this.route = res.route
-        this.directional = res.directional
-        this.runtime = res.runtime
-        this.onewayTime = res.onewayTime
-        this.kilometer = res.kilometer
-        this.interval = res.interval
-        this.dialog_visible = true
+        if(res.result === false) { //不存在 提示
+          this.error_msg = res.msg
+          this.error_dialog = true
+          this.dialog_visible = false
+        }
+        else{
+          res=res.data
+          this.type = res.type
+          this.name = res.name
+          this.route = res.route
+          this.directional = res.directional
+          this.runtime = res.runtime
+          this.onewayTime = res.onewayTime
+          this.kilometer = res.kilometer
+          this.interval = res.interval
+          this.dialog_visible = true
+          this.error_msg = false
+        }
       })
     }
   }
