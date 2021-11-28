@@ -3,7 +3,7 @@
     <el-row type="flex" class="row-input" justify="center">
       <el-col :span="6">
         <el-input
-          v-model="id"
+          v-model="name"
           placeholder="请输入要查询的线路名"
           clearable
         ></el-input>
@@ -41,7 +41,6 @@ import request from '../../../utils/request'
 export default {
   data () {
     return {
-      id: '',
       name: '',
       route: '',
       onewayTime: '',
@@ -57,7 +56,7 @@ export default {
     searchByName () {
       console.log(this.id)
       request.get('/basic/getLineInfo', { params:{
-          id: this.id
+          name: this.name
         }}).then(res => {
         console.log(res)
         this.type = res.type
