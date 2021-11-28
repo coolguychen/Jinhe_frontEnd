@@ -90,7 +90,7 @@ export default {
           this.kilometer = res.kilometer
           this.interval = res.interval
           this.dialog_visible = true
-          this.error_msg = false
+          this.error_dialog = false
         }
       })
     }
