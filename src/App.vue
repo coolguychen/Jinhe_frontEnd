@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <el-container>
-        <el-aside style="width: 300px">
+        <el-aside width="isCollapse ? '64px' : '200px' ">
           <!--引入自定义左侧菜单栏-->
           <left-menu></left-menu>
         </el-aside>

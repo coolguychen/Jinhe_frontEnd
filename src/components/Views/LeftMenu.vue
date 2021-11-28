@@ -1,8 +1,13 @@
 <!--自定义左边菜单栏-->
 <template>
   <div>
+    <div class="toggle-button" style="background-color:#545c64 " @click="toggleCollapse">
+      <i style="margin-left: 20px; color: white" class="el-icon-more"></i>
+    </div>
     <el-menu
-      style = "width: 300px; min-height: 100vh"
+      :collapse="isCollapse"
+      :collapse-transition="false"
+      style = "min-height: 100vh"
       :default-active ="this.$route.path"
       class="el-menu-vertical-demo"
       unique-opened = "true"
@@ -45,9 +50,14 @@
           <span>分析查询</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item index="/4-1">需求10</el-menu-item>
-          <el-menu-item index="/4-2">需求11</el-menu-item>
-          <el-menu-item index="/4-3">需求12</el-menu-item>
+          <el-menu-item index="/4-1">统计停靠路线最多的站点并排序</el-menu-item>
+          <el-menu-item index="/4-2-A">统计特殊站台</el-menu-item>
+          <el-menu-item index="/4-2-B">统计某条线路单行站</el-menu-item>
+          <el-menu-item index="/4-3">分组统计不同类型公交的数量</el-menu-item>
+          <el-menu-item index="/4-4">查询两条线路重复的站点名</el-menu-item>
+          <el-menu-item index="/4-5">查询换乘线路</el-menu-item>
+          <el-menu-item index="/4-6">按线路数量排序相邻站台</el-menu-item>
+          <el-menu-item index="/4-7">按站点数量对线路排序</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <el-menu-item index="/5">
@@ -66,6 +76,18 @@
 
 <script>
 export default {
-  name: 'LeftMenu'
+  data (){
+    return{
+      name: 'LeftMenu',
+      isCollapse: false
+    }
+
+  },
+  methods:{
+    //点击按钮折叠菜单
+    toggleCollapse(){
+      this.isCollapse = !this.isCollapse;	//点击折叠按钮后，对isCollapse进行取反
+    }
+  }
 }
 </script>
