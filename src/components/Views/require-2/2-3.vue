@@ -104,6 +104,7 @@ export default {
           this.interval = res.data.interval
           this.tableData = res.data.stationList
           this.dialog_visible = true
+          this.error_msg = false //搜索成功 取消警告
         }
         else{
           this.msg = res.msg

@@ -1,16 +1,5 @@
 <!--需求2：查询某条线路方向的全部站点信息-->
-<!--/**
-     * 2. 获取某条线路的全部站点信息
-     * @param name 线路名
-     * @param direction 方向（上行/下行）
-     * @return
-     */
-    @GetMapping("/getStations")
-    public List<Station> getStationsByLineName(String name, String direction){
-        String lineName = name+direction;
-        return stationService.queryPathByLineName(lineName);
-    }
--->
+
 <template>
   <div>
     <el-row type="flex" class="row-input" justify="center">
@@ -113,6 +102,7 @@ export default {
           }
           else {
             this.tableData = res.data
+            this.error_dialog = false //搜索成功 取消警告
             this.dialog_visible = true
           }
         })
