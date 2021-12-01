@@ -7,7 +7,7 @@
 <!--* @return 线路名，几分钟后到站-->
 <!--*/-->
 <template>
-  <div>
+  <div style="margin-left: 30px">
     <div>
       <el-descriptions title="请选择时间：">
 
@@ -52,11 +52,44 @@
     <el-button style="margin-top: 15px" type="primary" @click="queryNextLinesToCome" >搜索</el-button>
     <!--    输出即将停靠的线路-->
 
-    <el-descriptions style="margin-top: 15px" title="最近班次：" direction="vertical" column="2" border>
-      <el-descriptions-item label="班次">{{lineName}}</el-descriptions-item>
-      <el-descriptions-item label="信息">{{msg}}</el-descriptions-item>
+    <el-descriptions style="margin-top: 20px" title="最近班次：">
     </el-descriptions>
 
+    <div style="margin-left: 20px">
+      <el-table :data="tableData"
+                stripe border
+                style="width:601px; margin-left:50px; text-align: center;
+                align-content: center"
+      >
+        <el-table-column
+          prop="key"
+          label="班次"
+          width="300"
+          align="center"
+        >
+        </el-table-column>
+        <el-table-column
+          prop="value"
+          label="到站时间"
+          align="center"
+          width="300">
+          <template slot-scope="scope">
+            {{ scope.row.value == 0 ? '即将到站' : scope.row.value + '分钟后到站' }}
+          </template>
+        </el-table-column>
+
+      </el-table>
+
+      <subDialog v-show="dialog_visible">
+        <el-alert
+          title="错误提示："
+          type="error"
+          v-bind:description="msg"
+          show-icon>
+        </el-alert>
+      </subDialog>
+
+    </div>
   </div>
 </template>
 
@@ -68,10 +101,10 @@ export default {
     return {
       id:'',
       time:'',
+      dialog_visible:false,
       interval:'',
-      lineName:'',
-      tmp:'',
-      msg:''
+      msg:'',
+      tableData:[]
     }
   },
   methods:{
@@ -85,6 +118,14 @@ export default {
         }
       }).then(res => {
         console.log(res)
+        if(res.result == false){
+          this.msg = res.msg
+          this.dialog_visible = true
+        }
+        else{
+          this.tableData = res.data
+          this.dialog_visible = false //搜索成功 取消错误提示
+        }
       })
     }
   }
