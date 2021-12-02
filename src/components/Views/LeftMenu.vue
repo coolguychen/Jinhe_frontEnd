@@ -39,9 +39,9 @@
           <span>班次查询</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item index="/3-1">查询某线路的全部班次信息</el-menu-item>
-          <el-menu-item index="/3-2">查询在某个站停靠的所有线路</el-menu-item>
-          <el-menu-item index="/3-3">查询某条线路从某站到某站</el-menu-item>
+          <el-menu-item index="/3-1">查询某线路某个方向的全部班次信息</el-menu-item>
+          <el-menu-item index="/3-2">查询某个时刻某个站台某个时段即将停靠的线路</el-menu-item>
+          <el-menu-item index="/3-3">查询某个时刻某个站台线路最近的3趟班次</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <el-submenu index="4">
