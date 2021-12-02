@@ -40,8 +40,7 @@ export default {
         //声明json数组对象
         let category = []
         let value = []
-        //this.tableData = res.data
-        for(var i=0; i<chart_data.length; i++){
+        for(let i=0; i<chart_data.length; i++){
           category.push(chart_data[i].key) //json数组添加值用push
           value.push(chart_data[i].value)
         }
@@ -54,7 +53,7 @@ export default {
     },
     draw(category, value){
       // 基于准备好的dom，初始化echarts实例
-      var myChart = echarts.init(document.getElementById("MyChart"));
+      let myChart = echarts.init(document.getElementById("MyChart"));
       let option = {
         title: {
           text: '站点数量最多的15条线路'

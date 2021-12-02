@@ -22,6 +22,7 @@
     <el-table
       :data="tableData"
       stripe
+      border
       style="width: 100%; margin-left:50px; text-align: center; align-content: center">
       <el-table-column
         prop="key"
@@ -35,6 +36,12 @@
         label="站名"
         align="center"
         width="250">
+        <template slot-scope="{row}">
+          <div v-if="Array.isArray(row.value)">
+            <p v-for="(item, index) in row.value" :key="index">{{item}}</p>
+          </div>
+          <span v-else>{{row.value}}</span>
+        </template>
       </el-table-column>
     </el-table>
 
