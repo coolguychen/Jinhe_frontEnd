@@ -6,7 +6,7 @@
       <el-row type="flex" class="row-input" justify="center">
         <el-input class="el-input1" v-model="linePath" placeholder="请输入查询的线路名" clearable>
           <template slot="append">路</template>
-          <el-select class="el-select" v-model="direction" slot="prepend" placeholder="请选择">
+          <el-select class="el-select1" v-model="direction" slot="prepend" placeholder="请选择" clearable>
             <el-option label="上行" value="上行"></el-option>
             <el-option label="下行" value="下行"></el-option>
           </el-select>
@@ -16,13 +16,13 @@
         </el-col>
       </el-row>
     </div>
-    <div style="margin-top:20px">
-      <el-descriptions title="该线路方向上的全部站点信息" >
-      </el-descriptions>
-    </div>
 
     <!--返回该线路的全部station信息-->
     <subDialog v-show="dialog_visible">
+      <div style="margin-top:20px">
+        <el-descriptions title="该线路方向上的全部站点信息" >
+        </el-descriptions>
+      </div>
       <div style="max-height: 75vh;margin-top: 20px" class="allStation">
         <el-timeline >
           <el-timeline-item

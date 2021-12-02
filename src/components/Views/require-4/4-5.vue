@@ -27,7 +27,8 @@
 
     <!-- 输出所有可换乘的线路-->
     <subDialog v-show="dialog_visible">
-      <div class="main" style="max-height:90vh; margin-top: 15px">
+      <el-descriptions style="margin-top: 15px;margin-left: 30px" title="可换乘线路："></el-descriptions>
+      <div class="main" style="max-height:80vh; margin-top: 15px">
         <el-table :data="tableData" stripe border
                   style="width: 751px; margin-left:100px;
                 text-align: center; align-content: center">

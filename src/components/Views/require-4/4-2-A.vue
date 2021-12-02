@@ -8,7 +8,7 @@
           </el-descriptions>
         </div>
         <div id="MyChart"
-             style="width: 800px;height:600px;margin-top: 50px;margin-left: 100px"
+             style="width: 800px;height:600px;margin-left: 100px"
         ></div>
       </div>
     </el-tab-pane>
@@ -21,12 +21,13 @@
           <el-table
             :data="tableData"
             stripe
+            border
             height="80vh"
-            style="width: 100%; margin-left:50px; text-align: center; align-content: center">
+            style="width: 801px; margin-left:50px; text-align: center; align-content: center">
             <el-table-column
               prop="key"
               label="类型"
-              width="250"
+              width="300"
               align="center"
             >
             </el-table-column>
@@ -34,7 +35,7 @@
               prop="value"
               label="站名"
               align="center"
-              width="250">
+              width="500">
               <template slot-scope="{row}">
                 <div v-if="Array.isArray(row.value)">
                   <p v-for="(item, index) in row.value" :key="index">{{item}}</p>
