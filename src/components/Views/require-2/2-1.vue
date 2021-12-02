@@ -2,19 +2,20 @@
 
 <template>
   <div>
-    <el-row type="flex" class="row-input" justify="center">
-        <el-input style="width: 500px" v-model="linePath" placeholder="请输入查询的线路名" clearable>
+    <div style="margin-top: 15px">
+      <el-row type="flex" class="row-input" justify="center">
+        <el-input class="el-input1" v-model="linePath" placeholder="请输入查询的线路名" clearable>
           <template slot="append">路</template>
-          <el-select  style="width: 100px" v-model="direction" slot="prepend" placeholder="请选择">
+          <el-select class="el-select" v-model="direction" slot="prepend" placeholder="请选择">
             <el-option label="上行" value="上行"></el-option>
             <el-option label="下行" value="下行"></el-option>
           </el-select>
         </el-input>
-      <el-col :span="6" :offset="1">
-        <el-button type="primary" @click="getByLineName" >搜索</el-button>
-      </el-col>
-    </el-row>
-
+        <el-col :span="6" :offset="1">
+          <el-button type="primary" @click="getByLineName" >搜索</el-button>
+        </el-col>
+      </el-row>
+    </div>
     <div style="margin-top:20px">
       <el-descriptions title="该线路方向上的全部站点信息" >
       </el-descriptions>
@@ -22,7 +23,7 @@
 
     <!--返回该线路的全部station信息-->
     <subDialog v-show="dialog_visible">
-      <div style="margin-top: 20px" class="block">
+      <div style="max-height: 75vh;margin-top: 20px" class="allStation">
         <el-timeline >
           <el-timeline-item
             v-for="(item, index) in tableData"
@@ -47,7 +48,7 @@
       </el-alert>
     </subDialog>
 
-    <subDialog v-show="dialog_visible1">
+    <subDialog v-show="warn_dialog">
       <el-alert
         title="警告:"
         type="warning"
@@ -68,7 +69,7 @@ export default {
     return {
       dialog_visible: false,
       error_dialog: false,
-      dialog_visible1: false,
+      warn_dialog: false,
       line: '',
       color: "#409EFF",
       linePath:'',
@@ -87,8 +88,17 @@ export default {
         request.get('/station/allStations', { params:{
             line: this.line
           }}).then(res => {
-          console.log(res)
-          this.dialog_visible1 = true
+            if(res.data!=null) { //环线 能搜到沿路站点
+              this.tableData = res.data
+              this.dialog_visible = true
+              this.error_dialog = false //搜索成功 取消警告
+              this.warn_dialog = false
+            }
+            else {
+              this.warn_dialog = true
+              this.error_dialog = false
+              this.dialog_visible = false
+            }
         })
       else{
         request.get('/station/allStations', { params:{
@@ -97,12 +107,16 @@ export default {
           }}).then(res => {
           console.log(res)
           if(res.result == false) { //不存在 提示
-            this.msg = res.msg;
-            this.error_dialog = true;
+            this.msg = res.msg
+            this.error_dialog = true
+            //其余两个设为false
+            this.warn_dialog = false
+            this.dialog_visible = false
           }
           else {
             this.tableData = res.data
             this.error_dialog = false //搜索成功 取消警告
+            this.warn_dialog = false
             this.dialog_visible = true
           }
         })
@@ -113,4 +127,11 @@ export default {
 </script>
 
 <style>
+.el-select .el-input {
+  width: 100px;
+}
+.allStation{
+  overflow-y: visible;
+  overflow-x: hidden;
+}
 </style>

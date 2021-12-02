@@ -12,9 +12,9 @@
   <div>
     <div style="margin-top: 15px">
       <el-row type="flex" class="row-input" justify="center">
-        <el-input class="el-input" v-model="linePath" placeholder="请输入查询的线路名" clearable>
+        <el-input class="el-input1" v-model="linePath" placeholder="请输入查询的线路名" clearable>
           <template slot="append">路</template>
-          <el-select class="el-select" v-model="direction" slot="prepend" placeholder="请选择" clearable>
+          <el-select class="el-select1" v-model="direction" slot="prepend" placeholder="请选择" clearable>
             <el-option label="上行" value="上行"></el-option>
             <el-option label="下行" value="下行"></el-option>
           </el-select>
@@ -141,10 +141,10 @@ export default {
 </script>
 
 <style>
-.el-select .el-input {
+.el-select1 .el-input1 {
   width: 100px;
 }
-.el-input{
+.el-input1{
   width: 500px;
 }
 .el-alert {

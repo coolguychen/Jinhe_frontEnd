@@ -3,65 +3,70 @@
 <!--2/沿路站点-->
 <!--3/运行时长-->
 <template>
-  <div style="margin-left: 20px">
+  <div>
     <!--input-->
-    <el-row style="margin-top: 20px" type="flex" class="row-input" justify="center">
-      <el-col :span="6">
-        <el-input placeholder="请输入线路名" v-model="linePath">
-          <template slot="append">路</template>
-        </el-input>
-      </el-col>
-      <el-col :span="6">
-        <el-input placeholder="请输入起始站名" v-model="begin">
-        </el-input>
-      </el-col>
-      <el-col :span="6">
-        <el-input placeholder="请输入终止站名" v-model="end">
-        </el-input>
-      </el-col>
-      <el-col :span="2">
-        <el-button type="primary" @click="queryPathByStations">搜索</el-button>
-      </el-col>
-    </el-row>
+    <div>
+      <el-row style="margin-top: 20px" type="flex" justify="center">
+        <el-col :span="6">
+          <el-input placeholder="请输入线路名" v-model="linePath">
+            <template slot="append">路</template>
+          </el-input>
+        </el-col>
+        <el-col :span="6">
+          <el-input placeholder="请输入起始站名" v-model="begin">
+            <template slot="append">站</template>
+          </el-input>
+        </el-col>
+        <el-col :span="6">
+          <el-input placeholder="请输入终止站名" v-model="end">
+            <template slot="append">站</template>
+          </el-input>
+        </el-col>
+        <el-col :span="2">
+          <el-button type="primary" @click="queryPathByStations">搜索</el-button>
+        </el-col>
+      </el-row>
+    </div>
 
     <!--output-->
-    <subDialog v-show="dialog_visible">
-      <el-descriptions style="margin-top: 20px" title="基本线路信息" direction="vertical" :column="2" border>
-        <el-descriptions-item label="运行方向">{{lineName}}</el-descriptions-item>
-        <el-descriptions-item label="运行时长">{{interval}}</el-descriptions-item>
-      </el-descriptions>
-    </subDialog>
-    <!--返回该线路的全部station信息-->
-    <subDialog v-show="dialog_visible">
-      <div style="margin-top:20px">
-        <el-descriptions title="沿路站点" >
+    <div style="margin-left: 15px">
+      <subDialog v-show="dialog_visible">
+        <el-descriptions style="margin-top: 20px" title="基本线路信息" direction="vertical" :column="2" border>
+          <el-descriptions-item label="运行方向">{{lineName}}</el-descriptions-item>
+          <el-descriptions-item label="运行时长">{{interval}}</el-descriptions-item>
         </el-descriptions>
-      </div>
-      <div style="margin-top: 20px" class="block">
-        <el-timeline >
-          <el-timeline-item
-            v-for="(item, index) in tableData"
-            :key="index"
-            :color=color>
-            {{"站点id: "+ item.id}}
-            <br/>
-            {{item.name}}
-            <br/>
-            {{item.english}}
-          </el-timeline-item>
-        </el-timeline>
-      </div>
-    </subDialog>
+      </subDialog>
+      <!--返回该线路的全部station信息-->
+      <subDialog v-show="dialog_visible">
+        <div style="margin-top:20px">
+          <el-descriptions title="沿路站点" >
+          </el-descriptions>
+        </div>
+        <div class="passStation" style="max-height: 60vh;margin-top: 20px" >
+          <el-timeline >
+            <el-timeline-item
+              v-for="(item, index) in tableData"
+              :key="index"
+              :color=color>
+              {{"站点id: "+ item.id}}
+              <br/>
+              {{item.name}}
+              <br/>
+              {{item.english}}
+            </el-timeline-item>
+          </el-timeline>
+        </div>
+      </subDialog>
 
-    <subDialog v-show="error_msg">
-      <el-alert
-        title="错误提示："
-        type="error"
-        v-bind:description="msg"
-        show-icon>
-      </el-alert>
-    </subDialog>
-
+      <subDialog v-show="error_msg">
+        <el-alert
+          title="错误提示："
+          type="error"
+          v-bind:description="msg"
+          show-icon>
+        </el-alert>
+      </subDialog>
+    </div>
   </div>
 </template>
 
@@ -117,7 +122,11 @@ export default {
 </script>
 
 <style>
-.el-input{
+.el-input {
   width: 250px;
+}
+.passStation {
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 </style>
