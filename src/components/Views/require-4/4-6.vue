@@ -2,7 +2,7 @@
 <template>
   <div>
     <div id="MyChart"
-         style="width: 800px;height:800px;margin-left: 100px"
+         style="width: 800px;height:700px;margin-left: 100px"
     ></div>
   </div>
 </template>

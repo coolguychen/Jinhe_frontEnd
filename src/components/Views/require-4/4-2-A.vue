@@ -8,41 +8,45 @@
           </el-descriptions>
         </div>
         <div id="MyChart"
-             style="width: 800px;height:600px;margin-top: 50px;margin-left: 100px"
+             style="width: 800px;height:600px;margin-left: 100px"
         ></div>
       </div>
     </el-tab-pane>
 
     <el-tab-pane label="详细信息" name="second">
-      <div style="margin-top:20px">
+      <div>
         <el-descriptions title="统计所有特殊站台" >
         </el-descriptions>
       </div>
-          <el-table
-            :data="tableData"
-            stripe
-            height="80vh"
-            style="width: 100%; margin-left:50px; text-align: center; align-content: center">
-            <el-table-column
-              prop="key"
-              label="类型"
-              width="250"
-              align="center"
-            >
-            </el-table-column>
-            <el-table-column
-              prop="value"
-              label="站名"
-              align="center"
-              width="250">
-              <template slot-scope="{row}">
-                <div v-if="Array.isArray(row.value)">
-                  <p v-for="(item, index) in row.value" :key="index">{{item}}</p>
-                </div>
-                <span v-else>{{row.value}}</span>
-              </template>
-            </el-table-column>
-          </el-table>
+      <div style="max-height:80vh; overflow-y: visible; overflow-x: hidden">
+        <el-table
+          :data="tableData"
+          stripe
+          border
+          height="80vh"
+          style="width: 701px; margin-left:50px; text-align: center; align-content: center">
+          <el-table-column
+            prop="key"
+            label="类型"
+            width="250"
+            align="center"
+          >
+          </el-table-column>
+          <el-table-column
+            prop="value"
+            label="站名"
+            align="center"
+            width="450">
+            <template slot-scope="{row}">
+              <div v-if="Array.isArray(row.value)">
+                <p v-for="(item, index) in row.value" :key="index">{{item}}</p>
+              </div>
+              <span v-else>{{row.value}}</span>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+
     </el-tab-pane>
   </el-tabs>
 

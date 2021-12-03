@@ -3,11 +3,12 @@
   <div>
     <el-row style="width: auto" type="flex" class="row-input" justify="center">
       <div>
-        <el-input  v-model="line" placeholder="请输入查询的线路名" clearable>
+        <el-input  v-model="lineName" placeholder="请输入查询的线路名" clearable>
           <el-select  style="width: 100px" v-model="direction" slot="prepend" placeholder="请选择">
             <el-option label="上行" value="上行"></el-option>
             <el-option label="下行" value="下行"></el-option>
           </el-select>
+          <template slot="append">路</template>
         </el-input>
       </div>
       <el-col :span="6" :offset="1">
@@ -15,13 +16,12 @@
       </el-col>
     </el-row>
 
-    <!--返回该线路的全部班次信息-->
-    <div style="margin-top:20px">
-      <el-descriptions title="该线路方向上的全部班次信息" >
-      </el-descriptions>
-    </div>
-
     <subDialog v-show="dialog_table">
+      <!--返回该线路的全部班次信息-->
+      <div style="margin-top:20px">
+        <el-descriptions title="该线路方向上的全部班次信息" >
+        </el-descriptions>
+      </div>
       <div>
         <el-table
           :data="tableData"
@@ -74,9 +74,10 @@ export default {
   data () {
     return {
       dialog_error: false,
-      dialog_table: true,
+      dialog_table: false,
       error_msg: '',
       line: '',
+      lineName:'',
       direction: '',
       cols: [
       ],
@@ -89,6 +90,7 @@ export default {
   },
   methods:{
     getByLineName() {
+      this.line = this.lineName + '路'
       console.log(this.line,this.direction)
       request.get('/station/timetable', { params:{
           line: this.line,
@@ -112,7 +114,6 @@ export default {
             // console.log(this.data)
             // console.log(this.data[0])
             this.length = this.data[0].length
-            // console.log(this.length)
           }
         })
     }

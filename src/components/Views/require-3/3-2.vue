@@ -36,7 +36,7 @@
 
         <el-col span="6" >
           <!--某个时段-->
-          <el-descriptions title="请输入时段：">
+          <el-descriptions title="请选择时段长度：">
           </el-descriptions>
           <el-time-picker
             v-model="interval"

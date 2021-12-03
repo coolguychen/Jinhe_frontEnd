@@ -4,9 +4,9 @@
   <div>
     <div style="margin-top: 15px">
       <el-row type="flex" class="row-input" justify="center">
-        <el-input class="el-input1" v-model="linePath" placeholder="请输入查询的线路名" clearable>
+        <el-input class="el-input1" style="width: 500px" v-model="linePath" placeholder="请输入查询的线路名" clearable>
           <template slot="append">路</template>
-          <el-select class="el-select1" v-model="direction" slot="prepend" placeholder="请选择" clearable>
+          <el-select style="width: 100px" class="el-select1" v-model="direction" slot="prepend" placeholder="请选择" clearable>
             <el-option label="上行" value="上行"></el-option>
             <el-option label="下行" value="下行"></el-option>
           </el-select>
@@ -127,8 +127,8 @@ export default {
 </script>
 
 <style>
-.el-select .el-input {
-  width: 100px;
+.el-alert{
+  margin-top: 15px;
 }
 .allStation{
   overflow-y: visible;

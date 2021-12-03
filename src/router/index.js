@@ -12,7 +12,6 @@ import require8 from '../components/Views/require-3/3-2'
 import require9 from '../components/Views/require-3/3-3'
 import require10 from '../components/Views/require-4/4-1'
 import require11A from '../components/Views/require-4/4-2-A'
-import require11B from '../components/Views/require-4/4-2-B'
 import require12 from '../components/Views/require-4/4-3'
 import require13 from '../components/Views/require-4/4-4'
 import require14 from '../components/Views/require-4/4-5'
@@ -88,11 +87,6 @@ export default new Router({
       path: '/4-2-A',
       name: '4-2-A',
       component: require11A
-    },
-    {
-      path: '/4-2-B',
-      name: '4-2-B',
-      component: require11B
     },
     {
       path: '/4-3',

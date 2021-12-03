@@ -1,26 +1,30 @@
 <!--需求5 查询两个站之间的最短路径-->
 <template>
   <div>
-    <el-row type="flex" class="row-input" justify="center">
-      <el-col :span="6">
-        <el-descriptions title="始发站：" ></el-descriptions>
-      </el-col>
-      <el-col >
-        <el-input v-model="begin" clearable style="width: 60%"></el-input>
-      </el-col>
-      <el-col :span="6">
-        <el-descriptions title="终点站：" ></el-descriptions>
-      </el-col>
-      <el-col>
-          <el-input v-model="end" clearable style="width: 60%"></el-input>
-      </el-col>
-      <el-col :span="2">
-        <el-button type="primary" @click="search">搜索</el-button>
-      </el-col>
-    </el-row>
+    <div>
+      <el-row style="margin-top: 20px" type="flex" class="row-input" justify="center">
+        <el-col span="6">
+          <el-input placeholder="请输入起始站名" v-model="begin" clearable>
+            <template slot="append">站</template>
+          </el-input>
+        </el-col>
+        <el-col span="6">
+          <el-input placeholder="请输入终止站名" v-model="end" clearable>
+            <template slot="append">站</template>
+          </el-input>
+        </el-col>
+        <el-col :span="2">
+          <el-button type="primary" @click="search" >搜索</el-button>
+        </el-col>
+      </el-row>
+    </div>
 
     <subDialog v-show="dialog_visible">
-      <div style="margin-top: 50px" class="block">
+      <div style="margin-left: 20px">
+        <el-descriptions style="margin-top: 20px"  title="最短路径：">
+        </el-descriptions>
+      </div>
+      <div style="max-height: 75vh;margin-top: 20px" class="allStation">
         <el-timeline >
           <el-timeline-item
             v-for="(activity, index) in activities"
@@ -34,6 +38,7 @@
           </el-timeline-item>
         </el-timeline>
       </div>
+
     </subDialog>
 
     <subDialog v-show="error_dialog">
@@ -67,7 +72,7 @@ export default {
   },
   methods: {
     search () {
-      console.log(this.station)
+      console.log(this.begin, this.end)
       request.get('/station/shortestPath', { params:{
           begin: this.begin,
           end: this.end
@@ -90,5 +95,11 @@ export default {
 </script>
 
 <style>
+.block{
+  overflow-y: visible;
+}
+.el-alert{
+  margin-top: 15px;
+}
 
 </style>

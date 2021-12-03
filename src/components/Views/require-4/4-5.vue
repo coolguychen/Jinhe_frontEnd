@@ -12,14 +12,16 @@
   <div>
     <div style="margin-top: 15px">
       <el-row type="flex" class="row-input" justify="center">
-        <el-input class="el-input1" v-model="linePath" placeholder="请输入查询的线路名" clearable>
-          <template slot="append">路</template>
-          <el-select class="el-select1" v-model="direction" slot="prepend" placeholder="请选择" clearable>
-            <el-option label="上行" value="上行"></el-option>
-            <el-option label="下行" value="下行"></el-option>
-          </el-select>
-        </el-input>
-        <el-col :span="6" :offset="1">
+        <el-col :span="8">
+          <el-input style="width: 400px" v-model="linePath" placeholder="请输入查询的线路名" clearable>
+            <template slot="append">路</template>
+            <el-select style="width: 100px" class="el-select1" v-model="direction" slot="prepend" placeholder="请选择" clearable>
+              <el-option label="上行" value="上行"></el-option>
+              <el-option label="下行" value="下行"></el-option>
+            </el-select>
+          </el-input>
+        </el-col>
+        <el-col :span="2" :offset="1">
           <el-button type="primary" @click="findOtherLines" >搜索</el-button>
         </el-col>
       </el-row>
@@ -27,10 +29,10 @@
 
     <!-- 输出所有可换乘的线路-->
     <subDialog v-show="dialog_visible">
-      <el-descriptions style="margin-top: 15px;margin-left: 30px" title="可换乘线路："></el-descriptions>
-      <div class="main" style="max-height:80vh; margin-top: 15px">
+      <el-descriptions style="margin-top: 15px;margin-left:50px" title="可换乘线路："></el-descriptions>
+      <div class="main" style="max-height:78vh; overflow-y:visible; overflow-x: hidden; margin-top: 15px">
         <el-table :data="tableData" stripe border
-                  style="width: 751px; margin-left:100px;
+                  style="width: 751px; margin-left:150px;
                 text-align: center; align-content: center">
           <el-table-column
             prop="key"
@@ -142,17 +144,7 @@ export default {
 </script>
 
 <style>
-.el-select1 .el-input1 {
-  width: 100px;
-}
-.el-input1{
-  width: 500px;
-}
 .el-alert {
   margin-top: 15px;
-}
-.main {
-  overflow-y: visible;
-  overflow-x: hidden;
 }
 </style>

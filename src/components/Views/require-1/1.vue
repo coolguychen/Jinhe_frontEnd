@@ -6,7 +6,7 @@
           v-model="name"
           placeholder="请输入要查询的线路名"
           clearable
-        ></el-input>
+        ><template slot="append">路</template></el-input>
       </el-col>
       <el-col :span="6" :offset="1">
         <el-button type="primary" @click="searchByName">搜索</el-button>
@@ -25,9 +25,10 @@
         <el-descriptions-item label="单程时间">{{onewayTime}}</el-descriptions-item>
         <el-descriptions-item label="单向里程(km)">{{kilometer}}</el-descriptions-item>
         <el-descriptions-item label="班次间隔">{{interval}}</el-descriptions-item>
-
       </el-descriptions>
-
+      <div style="margin-top: 15px">
+       <el-button type="primary" @click="open">删除</el-button>
+      </div>
     </subDialog>
 
     <subDialog v-show="error_dialog">
@@ -93,6 +94,29 @@ export default {
           this.error_dialog = false
         }
       })
+    },
+    open(){
+      this.$confirm('此操作将永久删除该路线, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        //调用删除
+        this.deleteLine()
+        this.$message({
+          type: 'success',
+          message: '删除成功!'
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
+      });
+    },
+    //删除路线，传lineName
+    deleteLine(){
+
     }
   }
 }

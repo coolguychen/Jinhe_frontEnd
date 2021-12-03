@@ -26,11 +26,11 @@
           <span>站点查询</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item index="/2-1" >查询某线路的全部站点信息</el-menu-item>
-          <el-menu-item index="/2-2">查询在某个站停靠的所有线路</el-menu-item>
-          <el-menu-item index="/2-3">查询某条线路从某站到某站的具体信息</el-menu-item>
-          <el-menu-item index="/2-4">查询某两个站台之间的最短路径</el-menu-item>
-          <el-menu-item index="/2-5">查询某两个站台间是否存在直达线路</el-menu-item>
+          <el-menu-item index="/2-1" >线路站点信息</el-menu-item>
+          <el-menu-item index="/2-2">站点停靠线路</el-menu-item>
+          <el-menu-item index="/2-3">起止沿线站点</el-menu-item>
+          <el-menu-item index="/2-4">最短路径</el-menu-item>
+          <el-menu-item index="/2-5">直达线路判断</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <el-submenu index="3">
@@ -39,9 +39,9 @@
           <span>班次查询</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item index="/3-1">查询某线路某个方向的全部班次信息</el-menu-item>
-          <el-menu-item index="/3-2">查询某个时刻某个站台某个时段即将停靠的线路</el-menu-item>
-          <el-menu-item index="/3-3">查询某个时刻某个站台线路最近的3趟班次</el-menu-item>
+          <el-menu-item index="/3-1">线路班次信息</el-menu-item>
+          <el-menu-item index="/3-2">站点某时线路</el-menu-item>
+          <el-menu-item index="/3-3">站点某时某线</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <el-submenu index="4">
@@ -50,18 +50,18 @@
           <span>分析查询</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item index="/4-1">统计停靠路线最多的站点并排序</el-menu-item>
+          <el-menu-item index="/4-1">统计停靠路线</el-menu-item>
           <el-menu-item index="/4-2-A">统计特殊站台</el-menu-item>
-          <el-menu-item index="/4-2-B">统计某条线路单行站</el-menu-item>
-          <el-menu-item index="/4-3">分组统计不同类型公交的数量</el-menu-item>
-          <el-menu-item index="/4-4">查询两条线路重复的站点名</el-menu-item>
+<!--          <el-menu-item index="/4-2-B">统计某条线路单行站</el-menu-item>-->
+          <el-menu-item index="/4-3">统计路线类型</el-menu-item>
+          <el-menu-item index="/4-4">查询重复站点</el-menu-item>
           <el-menu-item index="/4-5">查询换乘线路</el-menu-item>
-          <el-menu-item index="/4-6">按线路数量排序相邻站台</el-menu-item>
-          <el-menu-item index="/4-7">按站点数量对线路排序</el-menu-item>
+          <el-menu-item index="/4-6">统计站点连接</el-menu-item>
+          <el-menu-item index="/4-7">统计路线站点</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <el-menu-item index="/5">
-        <i class="el-icon-search"></i>
+        <i class="el-icon-monitor"></i>
         <span slot="title">线路管理</span>
       </el-menu-item>
     </el-menu>
