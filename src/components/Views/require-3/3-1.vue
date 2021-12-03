@@ -20,67 +20,40 @@
       <el-descriptions title="该线路方向上的全部班次信息" >
       </el-descriptions>
     </div>
-    <table>
-      <tr>
-        <th v-for='(item,ind) in cols' :key="ind">{{item}}</th>
-      </tr>
-      <tr v-for='(item,index) in data' :key="index">
-        <td v-for='(it,ind) in item' :key="ind">{{item[it]}}</td>
-      </tr>
-    </table>
 
-<!--    <el-table-->
-<!--      stripe-->
-<!--      border-->
-<!--      height="500"-->
-<!--      style="width: 100%; margin-left:50px; text-align: center; align-content: center">-->
-<!--      <el-table-column-->
-<!--        type="index"-->
-<!--        width="50">-->
-<!--      </el-table-column>-->
-<!--      <template v-for="(col, index) in cols">-->
-<!--        <el-table-column-->
-<!--          :prop="col"-->
-<!--          :label="col">-->
-<!--          <template slot-scope="scope">-->
-<!--            {{scope.tableData[index]}}-->
-<!--          </template>-->
-<!--        </el-table-column>-->
-
-<!--      </template>-->
-<!--      <template v-for="(data, index) in tableData">-->
-
-<!--      </template>-->
-<!--    </el-table>-->
-
-<!--    <el-table-->
-<!--      :data="tableData"-->
-<!--      stripe-->
-<!--      style="width: 100%; margin-left:50px; text-align: center; align-content: center">-->
-<!--      <el-table-column-->
-<!--        prop="key"-->
-<!--        label="站台名"-->
-<!--        width="250"-->
-<!--        align="center"-->
-<!--      >-->
-<!--      </el-table-column>-->
-<!--      <el-table-column-->
-<!--        prop="value"-->
-<!--        label="时间表"-->
-<!--        align="center"-->
-<!--        width="250">-->
-<!--        <template v-for="(item, index) in data">-->
-<!--                  <el-table-column-->
-<!--                    :prop="index"-->
-<!--                    :label="index">-->
-<!--                    <template slot-scope="scope">-->
-<!--                      {{scope.row[index]}}-->
-<!--                    </template>-->
-<!--                  </el-table-column>-->
-
-<!--                </template>-->
-<!--      </el-table-column>-->
-<!--    </el-table>-->
+    <subDialog v-show="dialog_table">
+      <div>
+        <el-table
+          :data="tableData"
+          stripe
+          height="100vh"
+          style="width: 100%; margin-left:30px; text-align: center; align-content: center">
+          <el-table-column
+            prop="key"
+            fixed
+            label="站台名"
+            width="150"
+            align="center"
+          >
+          </el-table-column>
+          <el-table-column
+            prop="value"
+            label="班次"
+            align="center"
+            width="250">
+            <template v-for="(index) in length"> <!--length的范围是1-length-->
+              <el-table-column
+                :prop="'index'"
+                :label="'班次'+(index).toString()">
+                <template slot-scope="{row}">
+                  {{row.value[index-1]}}
+                </template>
+              </el-table-column>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+    </subDialog>
 
     <subDialog v-show="dialog_error">
       <el-alert
@@ -90,7 +63,6 @@
         show-icon>
       </el-alert>
     </subDialog>
-
 
   </div>
 </template>
@@ -102,14 +74,17 @@ export default {
   data () {
     return {
       dialog_error: false,
+      dialog_table: true,
       error_msg: '',
       line: '',
       direction: '',
       cols: [
       ],
-      tableData:[
+      data: [
       ],
-      data: []
+      tableData: [
+      ],
+      length: ''
     }
   },
   methods:{
@@ -119,27 +94,25 @@ export default {
           line: this.line,
           direction: this.direction
       }}).then(res => {
-          console.log(111111111)
           console.log(res)
           if(res.result == false) { //不存在 提示
             this.error_msg = res.msg
-            this.error_dialog = true
+            this.dialog_error = true
+            this.dialog_table = false
           }
           else {
             this.dialog_error = false
+            this.dialog_table = true
             this.tableData = res.data
-
             res.data.forEach((item) => {
               this.cols.push(item.key)
               this.data.push(item.value)
             })
-
-
-            console.log(this.cols)
-            console.log(this.data)
-            console.log(res.data)
-
-
+            // console.log(this.cols)
+            // console.log(this.data)
+            // console.log(this.data[0])
+            this.length = this.data[0].length
+            // console.log(this.length)
           }
         })
     }
