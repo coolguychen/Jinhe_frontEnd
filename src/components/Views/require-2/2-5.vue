@@ -13,12 +13,12 @@
   <div>
     <el-row style="margin-top: 20px" type="flex" class="row-input" justify="center">
       <el-col :span="6">
-        <el-input placeholder="请输入起始站名" v-model="begin" clearable>
+        <el-input style="width: 250px" placeholder="请输入起始站名" v-model="begin" clearable>
           <template slot="append">站</template>
         </el-input>
       </el-col>
       <el-col :span="6">
-        <el-input placeholder="请输入终止站名" v-model="end" clearable>
+        <el-input style="width: 250px" placeholder="请输入终止站名" v-model="end" clearable>
           <template slot="append">站</template>
         </el-input>
       </el-col>

@@ -24,6 +24,7 @@
           <el-descriptions title="请选择时间：">
           </el-descriptions>
           <el-time-picker
+            style="width: 250px;"
             v-model="time"
             format='HH:mm'
             value-format="HH:mm"
@@ -34,11 +35,12 @@
           </el-time-picker>
         </el-col>
 
-        <el-col span="6" >
+        <el-col span="6" offset="1">
           <!--某个时段-->
           <el-descriptions title="请选择时段长度：">
           </el-descriptions>
           <el-time-picker
+            style="width: 250px;"
             v-model="interval"
             format='mm'
             value-format="mm"

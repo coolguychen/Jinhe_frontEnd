@@ -1,16 +1,14 @@
 <!--需求7 查询某线路全部班次-->
 <template>
   <div>
-    <el-row style="width: auto" type="flex" class="row-input" justify="center">
-      <div>
-        <el-input  v-model="lineName" placeholder="请输入查询的线路名" clearable>
-          <el-select  style="width: 100px" v-model="direction" slot="prepend" placeholder="请选择">
-            <el-option label="上行" value="上行"></el-option>
-            <el-option label="下行" value="下行"></el-option>
-          </el-select>
-          <template slot="append">路</template>
-        </el-input>
-      </div>
+    <el-row type="flex" class="row-input" justify="center">
+      <el-input class="el-input1" style="width: 500px" v-model="lineName" placeholder="请输入查询的线路名" clearable>
+        <el-select style="width: 100px" class="el-select1" v-model="direction" slot="prepend" placeholder="请选择" clearable>
+          <el-option label="上行" value="上行"></el-option>
+          <el-option label="下行" value="下行"></el-option>
+        </el-select>
+        <template slot="append">路</template>
+      </el-input>
       <el-col :span="6" :offset="1">
         <el-button type="primary" @click="getByLineName" >搜索</el-button>
       </el-col>

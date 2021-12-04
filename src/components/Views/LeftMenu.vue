@@ -52,7 +52,6 @@
         <el-menu-item-group>
           <el-menu-item index="/4-1">统计停靠路线</el-menu-item>
           <el-menu-item index="/4-2-A">统计特殊站台</el-menu-item>
-<!--          <el-menu-item index="/4-2-B">统计某条线路单行站</el-menu-item>-->
           <el-menu-item index="/4-3">统计路线类型</el-menu-item>
           <el-menu-item index="/4-4">查询重复站点</el-menu-item>
           <el-menu-item index="/4-5">查询换乘线路</el-menu-item>
