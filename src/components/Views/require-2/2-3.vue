@@ -6,7 +6,7 @@
   <div>
     <!--input-->
     <div>
-      <el-row style="margin-top: 20px" type="flex" justify="center">
+      <el-row style="margin-top: 15px" type="flex" justify="center">
         <el-col :span="6">
           <el-input placeholder="请输入线路名" v-model="linePath">
             <template slot="append">路</template>

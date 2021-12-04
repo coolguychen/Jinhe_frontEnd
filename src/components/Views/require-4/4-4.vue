@@ -1,19 +1,19 @@
 <!--需求13 查询两条线路重复的站点名-->
 <template>
   <div>
-    <el-row type="flex" class="row-input" justify="center">
-      <el-col :span="6">
-        <el-input placeholder="请输入线路1" v-model="lineName1" clearable>
-          <el-select  style="width: 100px" v-model="direction1" slot="prepend" placeholder="请选择">
+    <el-row style="margin-top: 15px" type="flex" class="row-input" justify="center">
+      <el-col :span="8">
+        <el-input  style="width: 400px" placeholder="请输入线路1" v-model="lineName1" clearable>
+          <el-select  clearable style="width: 100px" v-model="direction1" slot="prepend" placeholder="请选择">
             <el-option label="上行" value="上行"></el-option>
             <el-option label="下行" value="下行"></el-option>
           </el-select>
           <template slot="append">路</template>
         </el-input>
       </el-col>
-      <el-col :span="6" offset="1">
-        <el-input placeholder="请输入线路2" v-model="lineName2" clearable>
-          <el-select  style="width: 100px" v-model="direction2" slot="prepend" placeholder="请选择">
+      <el-col :span="8" offset="1">
+        <el-input  style="width: 400px" placeholder="请输入线路2" v-model="lineName2" clearable>
+          <el-select  clearable style="width: 100px" v-model="direction2" slot="prepend" placeholder="请选择">
             <el-option label="上行" value="上行"></el-option>
             <el-option label="下行" value="下行"></el-option>
           </el-select>

@@ -1,8 +1,9 @@
 <template>
   <div>
-    <el-row type="flex" class="row-input" justify="center">
+    <el-row style="margin-top: 15px" type="flex" class="row-input" justify="center">
       <el-col :span="6">
         <el-input
+          style="width: 300px"
           v-model="name"
           placeholder="请输入要查询的线路名"
           clearable
