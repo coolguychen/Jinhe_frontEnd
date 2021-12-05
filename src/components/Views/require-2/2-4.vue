@@ -38,7 +38,6 @@
           </el-timeline-item>
         </el-timeline>
       </div>
-
     </subDialog>
 
     <subDialog v-show="error_dialog">
@@ -54,7 +53,6 @@
 </template>
 
 <script>
-
 import request from '../../../utils/request'
 
 export default {

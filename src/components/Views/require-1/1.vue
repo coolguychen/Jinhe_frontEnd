@@ -1,3 +1,4 @@
+<!--需求1 查询某条线路的基本信息-->
 <template>
   <div>
     <el-row style="margin-top: 15px" type="flex" class="row-input" justify="center">
@@ -27,6 +28,7 @@
         <el-descriptions-item label="单向里程(km)">{{kilometer}}</el-descriptions-item>
         <el-descriptions-item label="班次间隔">{{interval}}</el-descriptions-item>
       </el-descriptions>
+      <!-- 添加删除button，功能待实现-->
       <div style="margin-top: 15px">
        <el-button type="primary" @click="open">删除</el-button>
       </div>
@@ -40,11 +42,6 @@
         show-icon>
       </el-alert>
     </subDialog>
-
-    <slot class="error">
-
-    </slot>
-
 
   </div>
 </template>

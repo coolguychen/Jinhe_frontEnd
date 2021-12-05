@@ -52,7 +52,6 @@
       </div>
     </subDialog>
 
-
     <subDialog v-show="error_dialog">
       <el-alert
         title="错误提示："

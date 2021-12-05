@@ -1,5 +1,4 @@
 <!--需求2：查询某条线路方向的全部站点信息-->
-
 <template>
   <div>
     <div style="margin-top: 15px">
@@ -56,7 +55,6 @@
         show-icon>
       </el-alert>
     </subDialog>
-
 
   </div>
 </template>

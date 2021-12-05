@@ -1,11 +1,12 @@
 <!--需求10 统计停靠路线最多的站点并排序-->
-
 <template>
   <div>
+    <!--标签页-->
     <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
+      <!--显示图表-->
       <el-tab-pane label="图表" name="first">
         <div>
-          <div style="margin-top:20px">
+          <div style="margin-top:20px;margin-left: 15px">
             <el-descriptions title="统计停靠路线最多的站点" >
             </el-descriptions>
           </div>
@@ -14,7 +15,7 @@
           ></div>
         </div>
       </el-tab-pane>
-
+      <!--显示详情-->
       <el-tab-pane label="详细信息" name="second">
         <el-descriptions title="停靠路线最多的站点（前15个）"></el-descriptions>
         <div class="main" style="max-height:85vh;">
@@ -61,7 +62,6 @@
     </el-tabs>
 
   </div>
-
 </template>
 
 <script>
@@ -75,7 +75,6 @@ export default {
         activeName: 'first'
       }
   },
-  //通常是为methods函数提前定义（类似提前声明变量 进入页面内容全部渲染完成后自动引函数）
   mounted() {
     this.init()
   },
@@ -96,7 +95,7 @@ export default {
           category.push(table_data[i].name) //json数组添加值用push
           value.push(table_data[i].size)
         }
-        //降序排序
+        //因为是将值push进json数组的，所以还要降序排序
         category = category.reverse()
         value = value.reverse()
         console.log(category,value)

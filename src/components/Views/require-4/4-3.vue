@@ -1,7 +1,5 @@
 <!--需求12 分组统计常规公交(包括干线、支线、城乡线、驳接线、社区线)、-->
 <!--快速公交(K字开头)、高峰公交(G字开头)、夜班公交(N字开头)的数量。-->
-<!--用e-chart显示结果-->
-
 <template>
   <div>
     <div id="MyChart"
@@ -9,7 +7,6 @@
     ></div>
   </div>
 </template>
-
 
 <script>
 import request from "../../../utils/request"
@@ -20,12 +17,9 @@ export default {
     return {
     }
   },
-  //通常是为methods函数提前定义（类似提前声明变量 进入页面内容全部渲染完成后自动引函数）
   mounted() {
-    //画E-Chart图
     this.typesOfLine()
   },
-
   methods:{
     typesOfLine(){
       request.get('/analysis/linesByType', {
@@ -42,6 +36,7 @@ export default {
             value: item.value
           }
         });
+        //调用画Echart图的方法
         this.draw(chart_data)
       })
     },

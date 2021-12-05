@@ -1,13 +1,4 @@
 <!--需求14 查询换乘线路。换乘线路数即线路停靠的所有站台停靠其他线路的数量的总和-->
-<!--/**-->
-<!--* 14.-->
-<!--* @param lineName-->
-<!--* @return-->
-<!--*/-->
-<!--@GetMapping("/getOtherLines")-->
-<!--public List<String2ListDTO> findOtherLines(String lineName){-->
-<!--return analysisService.findOtherLines(lineName);-->
-<!--}-->
 <template>
   <div>
     <div style="margin-top: 15px">

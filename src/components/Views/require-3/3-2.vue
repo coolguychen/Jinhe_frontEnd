@@ -1,11 +1,4 @@
 <!--8.查询某个时刻某个站台某个时段内即将停靠的线路-->
-<!--/**-->
-<!--* 8.查询某个时刻某个站台某个时段内即将停靠的线路-->
-<!--* @param id 站台id-->
-<!--* @param time 当前时间-->
-<!--* @param interval 时段长度-->
-<!--* @return 线路名，几分钟后到站-->
-<!--*/-->
 <template>
   <div style="margin-left: 30px">
     <!--input-->
@@ -129,6 +122,7 @@ export default {
           this.dialog_visible = false
         }
         else{
+          console.log(res.data[0])
           this.tableData = res.data
           this.dialog_visible = true
           this.error_dialog = false //搜索成功 取消错误提示
@@ -140,6 +134,9 @@ export default {
 </script>
 
 <style>
+.el-alert{
+  margin-top: 15px;
+}
 .next{
   overflow-x: hidden;
   overflow-y: visible;

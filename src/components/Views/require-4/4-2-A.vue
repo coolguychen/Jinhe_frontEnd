@@ -3,7 +3,7 @@
   <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
     <el-tab-pane label="图表" name="first">
       <div>
-        <div style="margin-top:20px">
+        <div style="margin-top:20px;margin-left: 15px">
           <el-descriptions title="统计所有特殊站台" >
           </el-descriptions>
         </div>
@@ -46,10 +46,8 @@
           </el-table-column>
         </el-table>
       </div>
-
     </el-tab-pane>
   </el-tabs>
-
 </template>
 
 <script>

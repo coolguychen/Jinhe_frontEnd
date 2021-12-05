@@ -124,4 +124,7 @@ export default {
 </script>
 
 <style>
+.el-alert{
+  margin-top: 15px;
+}
 </style>

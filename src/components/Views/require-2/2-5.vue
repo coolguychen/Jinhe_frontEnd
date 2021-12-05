@@ -1,15 +1,8 @@
 <!--需求6 查询某两个站台间是否存在直达线路-->
-<!--@GetMapping("/getDirectPath")-->
-<!--public List<String> getDirectPath(String begin, String end){-->
-<!--return lineService.queryDirectLineByStations(begin, end);-->
-<!--}-->
-
 <!--说明：存在返回线路方向，不存在给出提示。-->
-
 <template>
 <div>
   <!--input:两个站台-->
-  <!--input-->
   <div>
     <el-row style="margin-top: 15px" type="flex" class="row-input" justify="center">
       <el-col :span="6">

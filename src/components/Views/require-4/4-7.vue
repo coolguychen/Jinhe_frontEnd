@@ -1,19 +1,10 @@
 <!--需求16 根据站点数量对线路进行排序-->
-
-<!--/**-->
-<!--* 16. 根据站点数量对线路进行排序-->
-<!--* @return 线路名&相应站点数-->
-<!--*/-->
-<!--Map<String, Integer> sortLinesByStations();-->
-<!--尝试用柱状图-->
-
 <template>
   <div>
     <div id="MyChart"
          style="width: 800px;height:700px;margin-left: 150px"
     ></div>
   </div>
-
 </template>
 
 <script>
@@ -25,7 +16,6 @@ export default {
     return {
     }
   },
-  //通常是为methods函数提前定义（类似提前声明变量 进入页面内容全部渲染完成后自动引函数）
   mounted() {
     this.sortLinesByStations()
   },

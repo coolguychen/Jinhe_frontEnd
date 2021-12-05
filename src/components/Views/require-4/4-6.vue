@@ -8,7 +8,6 @@
 </template>
 
 <script>
-
 import request from '../../../utils/request'
 import * as echarts from 'echarts'
 
@@ -41,7 +40,6 @@ export default {
         this.draw(category,value)
       })
     },
-
     draw(category, value){
       // 基于准备好的dom，初始化echarts实例
       let myChart = echarts.init(document.getElementById("MyChart"));
