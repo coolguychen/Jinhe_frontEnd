@@ -17,7 +17,7 @@
 
     <subDialog v-show="dialog_visible">
       <el-descriptions title="基本路线信息" direction="vertical" :column="4" border>
-        <el-descriptions-item label="路线名">{{name}}</el-descriptions-item>
+        <el-descriptions-item label="路线名">{{t_name}}</el-descriptions-item>
         <el-descriptions-item label="线路类型">{{type}}</el-descriptions-item>
         <el-descriptions-item label="路线走向">{{route}}</el-descriptions-item>
         <el-descriptions-item label="方向性">
@@ -54,6 +54,7 @@ export default {
   data () {
     return {
       name: '',
+      t_name: '',
       route: '',
       onewayTime: '',
       directional: '',
@@ -81,7 +82,7 @@ export default {
         else{
           res=res.data
           this.type = res.type
-          this.name = res.name
+          this.t_name = res.name
           this.route = res.route
           this.directional = res.directional
           this.runtime = res.runtime
