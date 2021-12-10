@@ -8,17 +8,17 @@
     <div>
       <el-row style="margin-top: 15px" type="flex" justify="center">
         <el-col :span="6">
-          <el-input placeholder="请输入线路名" v-model="linePath">
+          <el-input clearable placeholder="请输入线路名" v-model="linePath">
             <template slot="append">路</template>
           </el-input>
         </el-col>
         <el-col :span="6">
-          <el-input placeholder="请输入起始站名" v-model="begin">
+          <el-input clearable placeholder="请输入起始站名" v-model="begin">
             <template slot="append">站</template>
           </el-input>
         </el-col>
         <el-col :span="6">
-          <el-input placeholder="请输入终止站名" v-model="end">
+          <el-input clearable placeholder="请输入终止站名" v-model="end">
             <template slot="append">站</template>
           </el-input>
         </el-col>

@@ -58,15 +58,6 @@
       </el-alert>
     </subDialog>
 
-    <subDialog v-show="warn_dialog">
-      <el-alert
-        title="警告:"
-        type="warning"
-        description="请指定线路方向！"
-        show-icon>
-      </el-alert>
-    </subDialog>
-
   </div>
 </template>
 
@@ -90,44 +81,69 @@ export default {
     findOtherLines() {
       this.line = this.linePath + '路'
       console.log(this.line, this.direction)
-      // 如果direction为空 只传name
-      if(this.direction == '')
-        request.get('/analysis/transferLines', { params:{
-            line: this.line
-          }}).then(res => {
-          if(res.data!=null) { //环线 能搜到沿路站点
+      if(this.linePath == ''){
+        this.msg = "请输入线路名！"
+        this.dialog_visible = false
+        this.error_dialog = true
+        this.warn_dialog = false
+      }
+      else {
+        request.get('/analysis/transferLines', {
+          params: {
+            line: this.line,
+            direction: this.direction
+          }
+        }).then(res => {
+          if (res.result) {
             this.tableData = res.data
             this.dialog_visible = true
             this.error_dialog = false //搜索成功 取消警告
-            this.warn_dialog = false
-          }
-          else {
-            this.warn_dialog = true
-            this.error_dialog = false
+          } else {
+            this.msg = res.msg
+            this.error_dialog = true
             this.dialog_visible = false
           }
         })
-      //direction不为空
-      else{
-        request.get('/analysis/transferLines', { params:{
-            line: this.line,
-            direction: this.direction
-          }}).then(res => {
-            if(res.result == false) { //不存在 提示
-              this.msg = res.msg
-              this.error_dialog = true
-              this.dialog_visible = false
-              this.warn_dialog = false
-          }
-          else { //搜索成功
-              console.log(res)
-              this.tableData = res.data
-              this.dialog_visible =true
-              this.error_dialog = false //搜索成功 取消警告
-              this.warn_dialog = false
-          }
-        })
       }
+      // }
+      // // 如果direction为空 只传name
+      // if(this.direction == '')
+      //   request.get('/analysis/transferLines', { params:{
+      //       line: this.line
+      //     }}).then(res => {
+      //     if(res.data!=null) { //环线 能搜到沿路站点
+      //       this.tableData = res.data
+      //       this.dialog_visible = true
+      //       this.error_dialog = false //搜索成功 取消警告
+      //       this.warn_dialog = false
+      //     }
+      //     else {
+      //       this.warn_dialog = true
+      //       this.error_dialog = false
+      //       this.dialog_visible = false
+      //     }
+      //   })
+      // //direction不为空
+      // else{
+      //   request.get('/analysis/transferLines', { params:{
+      //       line: this.line,
+      //       direction: this.direction
+      //     }}).then(res => {
+      //       if(res.result == false) { //不存在 提示
+      //         this.msg = res.msg
+      //         this.error_dialog = true
+      //         this.dialog_visible = false
+      //         this.warn_dialog = false
+      //     }
+      //     else { //搜索成功
+      //         console.log(res)
+      //         this.tableData = res.data
+      //         this.dialog_visible =true
+      //         this.error_dialog = false //搜索成功 取消警告
+      //         this.warn_dialog = false
+      //     }
+      //   })
+      // }
     }
   }
 }

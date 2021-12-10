@@ -70,29 +70,36 @@ export default {
   methods: {
     searchByName () {
       console.log(this.id)
-      request.get('/basic/lineInfo', { params:{
-          name: this.name
-        }}).then(res => {
-        console.log(res)
-        if(res.result === false) { //不存在 提示
-          this.error_msg = res.msg
-          this.error_dialog = true
-          this.dialog_visible = false
-        }
-        else{
-          res=res.data
-          this.type = res.type
-          this.t_name = res.name
-          this.route = res.route
-          this.directional = res.directional
-          this.runtime = res.runtime
-          this.onewayTime = res.onewayTime
-          this.kilometer = res.kilometer
-          this.interval = res.interval
-          this.dialog_visible = true
-          this.error_dialog = false
-        }
-      })
+      if(this.name === ""){
+        this.error_msg = "请输入线路名！"
+        this.error_dialog = true
+        this.dialog_visible = false
+      }
+      else{
+        request.get('/basic/lineInfo', { params:{
+            name: this.name
+          }}).then(res => {
+          console.log(res)
+          if(res.result === false) { //不存在 提示
+            this.error_msg = res.msg
+            this.error_dialog = true
+            this.dialog_visible = false
+          }
+          else{
+            res=res.data
+            this.type = res.type
+            this.t_name = res.name
+            this.route = res.route
+            this.directional = res.directional
+            this.runtime = res.runtime
+            this.onewayTime = res.onewayTime
+            this.kilometer = res.kilometer
+            this.interval = res.interval
+            this.dialog_visible = true
+            this.error_dialog = false
+          }
+        })
+      }
     },
     open(){
       this.$confirm('此操作将永久删除该路线, 是否继续?', '提示', {

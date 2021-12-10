@@ -71,22 +71,29 @@ export default {
   methods: {
     search () {
       console.log(this.begin, this.end)
-      request.get('/station/shortestPath', { params:{
-          begin: this.begin,
-          end: this.end
-        }}).then(res => {
-        console.log(res)
-        if(res.result === false) { //不存在 提示
-          this.error_msg = res.msg
-          this.error_dialog = true
-          this.dialog_visible = false
-        }
-        else{
-          this.activities = res.data
-          this.dialog_visible = true
-          this.error_dialog = false
-        }
-      })
+      if(this.begin =='' || this.end == ''){
+        this.error_msg = "请输入站点名！"
+        this.error_dialog = true
+        this.dialog_visible = false
+      }
+      else{
+        request.get('/station/shortestPath', { params:{
+            begin: this.begin,
+            end: this.end
+          }}).then(res => {
+          console.log(res)
+          if(res.result === false) { //不存在 提示
+            this.error_msg = res.msg
+            this.error_dialog = true
+            this.dialog_visible = false
+          }
+          else{
+            this.activities = res.data
+            this.dialog_visible = true
+            this.error_dialog = false
+          }
+        })
+      }
     }
   }
 }

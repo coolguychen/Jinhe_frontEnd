@@ -98,25 +98,32 @@ export default {
       console.log(this.station)
       this.line1 = this.lineName1+'路'
       this.line2 = this.lineName2+'路'
-      request.get('/analysis/repeatedStations', { params:{
-          line1: this.line1,
-          direction1: this.direction1,
-          line2: this.line2,
-          direction2: this.direction2
-        }}).then(res => {
-        console.log(res)
-        if(res.result === false) { //不存在 提示
-          this.tableData = null
-          this.error_msg = res.msg
-          this.dialog_visible = false
-          this.error_dialog = true
-        }
-        else{
-          this.tableData = res.data
-          this.error_dialog = false
-          this.dialog_visible = true
-        }
-      })
+      if(this.lineName1 == '' || this.lineName2 == ''){
+        this.error_msg = "请输入线路名！"
+        this.dialog_visible = false
+        this.error_dialog = true
+      }
+      else{
+        request.get('/analysis/repeatedStations', { params:{
+            line1: this.line1,
+            direction1: this.direction1,
+            line2: this.line2,
+            direction2: this.direction2
+          }}).then(res => {
+          console.log(res)
+          if(res.result === false) { //不存在 提示
+            this.tableData = null
+            this.error_msg = res.msg
+            this.dialog_visible = false
+            this.error_dialog = true
+          }
+          else{
+            this.tableData = res.data
+            this.error_dialog = false
+            this.dialog_visible = true
+          }
+        })
+      }
     }
   }
 }

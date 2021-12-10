@@ -107,27 +107,34 @@ export default {
   methods:{
     queryNextLinesToCome() {
       console.log(this.time,this.interval)
-      request.get('/station/nextLines', {
-        params:{
-          id: this.id,
-          time: this.time,
-          interval: this.interval
-        }
-      }).then(res => {
-        console.log(res)
-        if(res.result == false){
-          this.msg = res.msg
-          //搜索失败，隐藏表格并提示错误
-          this.error_dialog = true
-          this.dialog_visible = false
-        }
-        else{
-          console.log(res.data[0])
-          this.tableData = res.data
-          this.dialog_visible = true
-          this.error_dialog = false //搜索成功 取消错误提示
-        }
-      })
+      if(this.id == '' || this.time == '' || this.interval == ''){
+        this.msg = '请输入完整信息！'
+        this.error_dialog = true
+        this.dialog_visible = false
+      }
+      else{
+        request.get('/station/nextLines', {
+          params:{
+            id: this.id,
+            time: this.time,
+            interval: this.interval
+          }
+        }).then(res => {
+          console.log(res)
+          if(res.result == false){
+            this.msg = res.msg
+            //搜索失败，隐藏表格并提示错误
+            this.error_dialog = true
+            this.dialog_visible = false
+          }
+          else{
+            console.log(res.data[0])
+            this.tableData = res.data
+            this.dialog_visible = true
+            this.error_dialog = false //搜索成功 取消错误提示
+          }
+        })
+      }
     }
   }
 }

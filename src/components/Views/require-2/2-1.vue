@@ -47,15 +47,6 @@
       </el-alert>
     </subDialog>
 
-    <subDialog v-show="warn_dialog">
-      <el-alert
-        title="警告:"
-        type="warning"
-        description="请指定线路方向！"
-        show-icon>
-      </el-alert>
-    </subDialog>
-
   </div>
 </template>
 
@@ -67,7 +58,6 @@ export default {
     return {
       dialog_visible: false,
       error_dialog: false,
-      warn_dialog: false,
       line: '',
       color: "#409EFF",
       linePath:'',
@@ -81,23 +71,29 @@ export default {
     getByLineName() {
       console.log(this.linePath,this.direction)
       this.line = this.linePath + '路'
-      request.get('/station/allStations', { params:{
-          line: this.line,
-          direction : this.direction
-        }}).then(res => {
-        if(res.result) {
-          this.tableData = res.data
-          this.dialog_visible = true
-          this.error_dialog = false //搜索成功 取消警告
-          this.warn_dialog = false
-        }
-        else {
-          this.msg = res.msg
-          this.warn_dialog = false
-          this.error_dialog = true
-          this.dialog_visible = false
-        }
-      })
+      if(this.linePath === ''){
+        this.msg = "请输入线路名！"
+        this.dialog_visible = false
+        this.error_dialog = true
+        this.warn_dialog = false
+      }
+      else{
+        request.get('/station/allStations', { params:{
+            line: this.line,
+            direction : this.direction
+          }}).then(res => {
+          if(res.result) {
+            this.tableData = res.data
+            this.dialog_visible = true
+            this.error_dialog = false //搜索成功 取消警告
+          }
+          else {
+            this.msg = res.msg
+            this.error_dialog = true
+            this.dialog_visible = false
+          }
+        })
+      }
     }
   }
 }

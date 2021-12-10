@@ -27,8 +27,9 @@
         <el-table
           :data="tableData"
           stripe
+          ref="multipleTable"
           height="100vh"
-          style="width: 100%; margin-left:30px; text-align: center; align-content: center">
+          style="width: 100%; max-height: 80vh; margin-left:30px; text-align: center; align-content: center">
           <el-table-column
             prop="key"
             fixed
@@ -93,32 +94,38 @@ export default {
     getByLineName() {
       this.line = this.lineName + '路'
       console.log(this.line,this.direction)
+      if(this.lineName === ''){
+        this.error_msg = "请输入线路名！"
+        this.dialog_error = true
+        this.dialog_table = false
+      }
       request.get('/station/timetable', { params:{
           line: this.line,
           direction: this.direction
       }}).then(res => {
           console.log(res)
-          if(res.result == false) { //不存在 提示
+          if(res.result === false) { //不存在 提示
             this.error_msg = res.msg
             this.dialog_error = true
             this.dialog_table = false
           }
           else {
             this.dialog_error = false
-            this.dialog_table = true
             this.tableData = res.data
+            this.data = []
             res.data.forEach((item) => {
               this.cols.push(item.key)
               this.data.push(item.value)
             })
-            // console.log(this.cols)
-            // console.log(this.data)
-            // console.log(this.data[0])
             this.length = this.data[0].length
+            this.dialog_table = true
           }
-        })
+          this.$nextTick(() => {
+            this.$refs.multipleTable.doLayout()
+            // table加ref="multipleTable"
+          });
+      })
     }
-
   }
 }
 </script>

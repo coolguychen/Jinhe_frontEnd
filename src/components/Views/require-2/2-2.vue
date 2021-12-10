@@ -82,22 +82,30 @@ export default {
   methods: {
     searchByName () {
       console.log(this.station)
-      request.get('/station/allLines', { params:{
-          station: this.station
-        }}).then(res => {
-        console.log(res)
-        if(res.result === false) { //不存在 提示
-          this.tableData = null
-          this.error_msg = res.msg
-          this.error_dialog = true
-          this.dialog_visible = false
-        }
-        else{
-          this.tableData = res.data
-          this.dialog_visible = true
-          this.error_dialog = false
-        }
-      })
+      if(this.station ===''){
+        this.error_msg = "请输入站点名！"
+        this.error_dialog = true
+        this.dialog_visible = false
+      }
+      else{
+        request.get('/station/allLines', { params:{
+            station: this.station
+          }}).then(res => {
+          console.log(res)
+          if(res.result === false) { //不存在 提示
+            this.tableData = null
+            this.error_msg = res.msg
+            this.error_dialog = true
+            this.dialog_visible = false
+          }
+          else{
+            this.tableData = res.data
+            this.dialog_visible = true
+            this.error_dialog = false
+          }
+        })
+      }
+
     }
   }
 }
