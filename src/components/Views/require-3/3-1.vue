@@ -99,10 +99,11 @@ export default {
         this.dialog_error = true
         this.dialog_table = false
       }
-      request.get('/station/timetable', { params:{
-          line: this.line,
-          direction: this.direction
-      }}).then(res => {
+      else{
+        request.get('/station/timetable', { params:{
+            line: this.line,
+            direction: this.direction
+          }}).then(res => {
           console.log(res)
           if(res.result === false) { //不存在 提示
             this.error_msg = res.msg
@@ -124,7 +125,8 @@ export default {
             this.$refs.multipleTable.doLayout()
             // table加ref="multipleTable"
           });
-      })
+        })
+      }
     }
   }
 }
