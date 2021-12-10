@@ -21,7 +21,7 @@
         <el-descriptions-item label="线路类型">{{type}}</el-descriptions-item>
         <el-descriptions-item label="路线走向">{{route}}</el-descriptions-item>
         <el-descriptions-item label="方向性">
-          <el-tag size="small">{{ directional == "true" ? '双向' : '单向/环线'}}</el-tag>
+          <el-tag size="small">{{ (directional == "TRUE" || directional == "true") ? '双向' : '单向/环线'}}</el-tag>
         </el-descriptions-item>
         <el-descriptions-item label="运行时间">{{runtime}}</el-descriptions-item>
         <el-descriptions-item label="单程时间">{{onewayTime}}</el-descriptions-item>
@@ -122,5 +122,7 @@ export default {
 </script>
 
 <style>
-
+.el-alert{
+  margin-top: 15px;
+}
 </style>

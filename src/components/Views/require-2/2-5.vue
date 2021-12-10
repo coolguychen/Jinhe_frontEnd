@@ -43,6 +43,9 @@
             label="方向"
             align="center"
             width="300">
+            <template slot-scope="scope">
+              {{ scope.row.value == '' ? '/' : scope.row.value }}
+            </template>
           </el-table-column>
         </el-table>
       </div>
@@ -79,25 +82,32 @@ export default {
   },
   methods:{
     findDirectionLine() {
-      request.get('/station/directLine', {
-        params:{
-          begin: this.begin,
-          end: this.end
-        }
-      }).then(res => {
-        console.log(res)
-        if(res.result == false){
-          this.hint_msg = true
-          this.dialog_visible = false //搜索失败 不显示表格
-          this.msg = res.msg
-        }
-        else{ //搜索成功
-          console.log(res.data)
-          this.tableData = res.data
-          this.dialog_visible = true //显示直达路径
-          this.hint_msg = false //取消错误提示信息
-        }
-      })
+      if(this.begin == this.end){
+        this.msg = "起始站和终点站不能是同一站点！"
+        this.hint_msg = true
+        this.dialog_visible = false //搜索失败 不显示表格
+      }
+      else{
+        request.get('/station/directLine', {
+          params:{
+            begin: this.begin,
+            end: this.end
+          }
+        }).then(res => {
+          console.log(res)
+          if(res.result == false){
+            this.hint_msg = true
+            this.dialog_visible = false //搜索失败 不显示表格
+            this.msg = res.msg
+          }
+          else{ //搜索成功
+            console.log(res.data)
+            this.tableData = res.data
+            this.dialog_visible = true //显示直达路径
+            this.hint_msg = false //取消错误提示信息
+          }
+        })
+      }
     }
   }
 }

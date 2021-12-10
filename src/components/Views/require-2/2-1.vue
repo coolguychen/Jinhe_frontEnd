@@ -81,44 +81,23 @@ export default {
     getByLineName() {
       console.log(this.linePath,this.direction)
       this.line = this.linePath + '路'
-      // 如果direction为空 只传name
-      if(this.direction == '')
-        request.get('/station/allStations', { params:{
-            line: this.line
-          }}).then(res => {
-            if(res.data!=null) { //环线 能搜到沿路站点
-              this.tableData = res.data
-              this.dialog_visible = true
-              this.error_dialog = false //搜索成功 取消警告
-              this.warn_dialog = false
-            }
-            else {
-              this.warn_dialog = true
-              this.error_dialog = false
-              this.dialog_visible = false
-            }
-        })
-      else{
-        request.get('/station/allStations', { params:{
-            line: this.line,
-            direction: this.direction
-          }}).then(res => {
-          console.log(res)
-          if(res.result == false) { //不存在 提示
-            this.msg = res.msg
-            this.error_dialog = true
-            //其余两个设为false
-            this.warn_dialog = false
-            this.dialog_visible = false
-          }
-          else {
-            this.tableData = res.data
-            this.error_dialog = false //搜索成功 取消警告
-            this.warn_dialog = false
-            this.dialog_visible = true
-          }
-        })
-      }
+      request.get('/station/allStations', { params:{
+          line: this.line,
+          direction : this.direction
+        }}).then(res => {
+        if(res.result) {
+          this.tableData = res.data
+          this.dialog_visible = true
+          this.error_dialog = false //搜索成功 取消警告
+          this.warn_dialog = false
+        }
+        else {
+          this.msg = res.msg
+          this.warn_dialog = false
+          this.error_dialog = true
+          this.dialog_visible = false
+        }
+      })
     }
   }
 }

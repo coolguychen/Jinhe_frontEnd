@@ -105,7 +105,22 @@ export default {
         }
         }).then(res => {
         console.log(res)
-        if(res.result == true){
+        if(this.linePath == ''){
+          this.msg = "请输入线路名！"
+          this.dialog_visible = false
+          this.error_msg = true
+        }
+        else if(this.begin == '' || this.end == ''){
+          this.msg = "请输入站点名！"
+          this.dialog_visible = false
+          this.error_msg = true
+        }
+        else if(this.begin == this.end) {
+          this.msg = "起始站和终点站不能是同一站点！"
+          this.dialog_visible = false
+          this.error_msg = true
+        }
+        else if(res.result == true){
           this.lineName = res.data.lineName
           this.interval = res.data.interval
           this.tableData = res.data.stationList
@@ -115,6 +130,7 @@ export default {
         else{
           this.msg = res.msg
           this.error_msg = true
+          this.dialog_visible = false
         }
       })
     }
@@ -125,6 +141,9 @@ export default {
 <style>
 .el-input {
   width: 250px;
+}
+.el-alert{
+  margin-top: 15px;
 }
 .passStation {
   overflow-x: hidden;
