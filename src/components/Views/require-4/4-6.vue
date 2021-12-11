@@ -70,7 +70,7 @@ export default {
         },
         series: [
           {
-            name: '站点数量',
+            name: '线路数量',
             type: 'bar',
             data: value,
             itemStyle: {        //上方显示数值
