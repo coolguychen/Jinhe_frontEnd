@@ -1,5 +1,5 @@
 {
-  "name": "wj-vue",
+  "name": "金河市公交线路系统",
   "version": "1.0.0",
   "description": "A Vue.js project",
   "author": "coolguychen <1098420273@qq.com>",
@@ -11,6 +11,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "echarts": "^5.2.2",
     "element-ui": "^2.15.6",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
